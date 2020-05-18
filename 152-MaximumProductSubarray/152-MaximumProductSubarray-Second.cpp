@@ -4,6 +4,8 @@
 #include <algorithm>
 using namespace std;
 
+// nums[i] > 0时，如果nums[i]存在和dp_max_i重叠的部分dp_tmp数组使得dp_tmp * nums[i] > dp_max_i * nums[i]，那么dp_max_i必然不是最优解。
+// 子数组和同理且不分正负
 class Solution
 {
   public:
