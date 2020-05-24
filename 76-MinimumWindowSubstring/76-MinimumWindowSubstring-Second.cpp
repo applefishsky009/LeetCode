@@ -6,6 +6,7 @@
 using namespace std;
 
 // 使用map减法来做，优势在于非T字符为负，可以用数量标识是否向左更新
+// 该解法充分利用了unordered_map的value init特性，注意以后对该数据结构遍历时考虑是否能做该优化
 class Solution {
   public:
 	string minWindow(string S, string T) {
