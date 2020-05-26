@@ -25,7 +25,7 @@ class LRUCache {
         if (listMap.find(key) == listMap.end())
             return -1;
         valList.splice(valList.begin(), valList, listMap[key]);
-        // listMap[key] = valList.begin(); // why？
+        // listMap[key] = valList.begin(); // C++98 is iterator C++11 is const iterator
         return listMap[key]->value;
     }
 
@@ -40,7 +40,7 @@ class LRUCache {
         } else {
             listMap[key]->value = value;    // 值重置
             valList.splice(valList.begin(), valList, listMap[key]);
-            // listMap[key] = valList.begin(); // why?
+            // listMap[key] = valList.begin(); // C++98 is iterator C++11 is const iterator
         }
     }
 };
