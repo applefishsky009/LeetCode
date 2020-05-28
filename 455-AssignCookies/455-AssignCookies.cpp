@@ -1,6 +1,8 @@
 #include <vector>
-#include <algorithm>
+#include <random>
+#include <chrono>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 class Solution2 {
@@ -23,8 +25,8 @@ class Solution {
   public:
     int findContentChildren(vector<int>& g, vector<int>& s) {
         int i = 0, j = 0, g_size = g.size(), s_size = s.size();
-        quickSort(g, 0, g_size - 1);
-        quickSort(s, 0, s_size - 1);
+        randomizedQuickSort(g, 0, g_size - 1); // quickSort(g, 0, g_size - 1);
+        randomizedQuickSort(s, 0, s_size - 1); // quickSort(s, 0, s_size - 1);
         while (i < g_size && j < s_size) {
             if (s[j] >= g[i]) // 找到饼干, 分配下一个孩子
                 i++;
@@ -33,6 +35,23 @@ class Solution {
         return i;
     }
   private:
+    void randomizedQuickSort(vector<int>& g, int start, int end) {
+        int q = 0;
+        if (start < end) {
+            q = randomizedPartion(g, start, end);
+            randomizedQuickSort(g, start, q - 1);
+            randomizedQuickSort(g, q + 1, end);
+        }
+    }
+    int randomizedPartion(vector<int>& g, int start, int end) {
+        int dice_roll = 0;
+        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+        default_random_engine generateor(seed);   // 随机数生成
+        uniform_int_distribution<int> distribution(start, end);
+        dice_roll = distribution(generateor);
+        swap(g[dice_roll], g[end]);
+        return partition(g, start, end);
+    }
     void quickSort(vector<int>& g, int start, int end) {
         int q = 0;
         if (start < end) {
