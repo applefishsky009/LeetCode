@@ -11,7 +11,7 @@ using namespace std;
 // BST 5个对外接口-中序遍历,查找,插入,删除,创建,5个内部接口-迭代搜索,最大值,最小值,查找后继,子树替换
 class BinarySearchTree {
   public:
-    // 中序遍历BTS树x,返回序列是有序的
+    // 中序遍历BST树x,返回序列是有序的
     void inorderTreeWalk(TreeNode *x, vector<int> &inorder) {
         if (!x) return;
         inorderTreeWalk(x->left, inorder);
@@ -25,7 +25,7 @@ class BinarySearchTree {
             return treeSearch(root->left, target);
         return treeSearch(root->right, target);
     }
-    // 在root的BTS中插入single节点
+    // 在root的BST中插入single节点
     TreeNode* treeInsert(TreeNode* root, TreeNode* single) {
         TreeNode *parent = nullptr;
         TreeNode *child = root;
@@ -45,7 +45,7 @@ class BinarySearchTree {
             parent->right = single;
         return root;
     }
-    // 在root的BTS中删除single节点
+    // 在root的BST中删除single节点
     TreeNode* treeDelete(TreeNode* root, TreeNode* single) {
         if (!single) 
             return root;
@@ -67,7 +67,7 @@ class BinarySearchTree {
         return root;
     }
     // 随机构建二叉搜索树, 最坏理论性能O(lgn)
-    TreeNode* constructBTSTree(vector<int> &nums) {
+    TreeNode* constructBSTTree(vector<int> &nums) {
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         shuffle(nums.begin(), nums.end(), default_random_engine(seed));
         TreeNode *root = nullptr;
@@ -76,7 +76,7 @@ class BinarySearchTree {
         return root;
     }
   private:
-    // 以迭代的方式查找root的BTS中是否存在val为target的节点
+    // 以迭代的方式查找root的BST中是否存在val为target的节点
     TreeNode* iterativeTreeSearch(TreeNode *root, int target) {
         while (!root && root->val != target) {
             if (target < root->val)
@@ -86,14 +86,14 @@ class BinarySearchTree {
         }
         return root;
     }
-    // 查找root的BTS树中的最小值
+    // 查找root的BST树中的最小值
     TreeNode* treeMinimum(TreeNode *root) {
         if (!root) return nullptr;   // 可以交给调用这个函数的条件判断
         while (root->left)
             root = root->left;
         return root;
     }
-    // 查找root的BTS树中的最大值
+    // 查找root的BST树中的最大值
     TreeNode* treeMaximum(TreeNode *root) {
         if (!root) return nullptr;   // 可以交给调用这个函数的条件判断
         while (root->right)
@@ -112,7 +112,7 @@ class BinarySearchTree {
         }
         return rootp;
     }
-    // root为BTS树根, u,v是root的子树, 用子树v替换子树u, 仅改变父亲的连接关系
+    // root为BST树根, u,v是root的子树, 用子树v替换子树u, 仅改变父亲的连接关系
     void transPlant(TreeNode* root, TreeNode *u, TreeNode *v) {
         if (!u->parent) // u为根节点
             root = v;
@@ -168,13 +168,13 @@ int main() {
     // cout << s.containsNearbyDuplicate(nums3, 0) << endl;
 
     TreeNode *root = constructTree(vector<int>() = {4, 2, 7, 1, 3});
-    BinarySearchTree bts;
-    TreeNode *rootbts = bts.constructBTSTree(vector<int>() = {4, 2, 7, 1, 3});
-    showTree(rootbts);
-    bts.treeDelete(rootbts, rootbts->right);
-    showTree(rootbts);
+    BinarySearchTree bst;
+    TreeNode *rootbst = bst.constructBSTTree(vector<int>() = {4, 2, 7, 1, 3});
+    showTree(rootbst);
+    bst.treeDelete(rootbst, rootbst->right);
+    showTree(rootbst);
     vector<int> ans;
-    bts.inorderTreeWalk(root, ans);
+    bst.inorderTreeWalk(root, ans);
     show1DVector(ans);
     
     return 1;
