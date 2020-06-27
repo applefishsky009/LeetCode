@@ -5,7 +5,7 @@
 using namespace std;
 
 // 桶排序, 原地交换
-class Solution {
+class Solution1 {
   public:
 	int firstMissingPositive(vector<int>& nums) {
 		const int len = nums.size();
@@ -21,6 +21,26 @@ class Solution {
 				return i + 1;
 		return len + 1;
 	}
+};
+
+// 类似桶排序, 没有排序, 进行标记
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+        for (int& num: nums)	// 负数转化为正
+            if (num <= 0)
+                num = n + 1;
+        for (int i = 0; i < n; ++i) {	// 出现过的索引转化为负
+            int num = abs(nums[i]);
+            if (num <= n)
+                nums[num - 1] = -abs(nums[num - 1]);
+        }
+        for (int i = 0; i < n; ++i)	// 返回首次为正的索引下标对应的值
+            if (nums[i] > 0)
+                return i + 1;
+        return n + 1;	// 没有正索引
+    }
 };
 
 int main() {
