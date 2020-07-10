@@ -31,7 +31,7 @@ class Solution1 {
 // dp[i][1]表示第i天结束手里有一支股票 dp[i][1] = max(dp[i - 1][1], -prices[i])	// 买
 // dp[i][1]表示第i天结束手里有一支股票 dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])	// 买
 // time: O(n)
-// space: O(n)
+// space: O(1)
 class Solution {
   public:
     int maxProfit(vector<int> &prices) {
