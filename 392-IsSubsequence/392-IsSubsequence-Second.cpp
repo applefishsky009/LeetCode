@@ -18,6 +18,7 @@ class Solution1 {
 };
 
 // Greedy
+// 下标代表从当前位(占据)往后看的第一个字符的位置, 这必然不包括当前位, 是当前位的开区间, 这样第一个字符就不被包括了. 所以需要一个哨兵.
 // time: O(n + m)
 // space: O(n)
 class Solution2 {
@@ -35,7 +36,7 @@ class Solution2 {
     }
 };
 
-// DP
+// DP - 占据当前位置并跳过
 // f[i][j] = i if t[i] == j else f[i + 1][j] if t[i] != j;
 // time: O(n + m)
 // space: O(n)
