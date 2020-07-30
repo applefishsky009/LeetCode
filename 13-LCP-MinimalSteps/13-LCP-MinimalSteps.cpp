@@ -9,6 +9,8 @@ using namespace std;
 // m = 16, mask = 0000 1100 0001 0001的已触发集合为[1, 5, 11, 12]剩下的元素即为未触发集合, f(mask, i)表示在当前第i个M处, 触发状态为mask的最小步数
 // 状态转移方程: f(mask, i) = min(f(mask xor 2exp(i), j) + d(j, i))  j 为已触发集合, j != i.
 // 状态转移方程2: f(mask|2exp(i), j) = min{f(mask, i) + d(i, j)}    j 为已触发集合, j != i.
+// time: O(m*s + m^2*o + 2^m*m^2)
+// space: O(s + b*s + 2^m*m)
 class Solution {
   public:
     int minimalSteps(vector<string> maze) {
