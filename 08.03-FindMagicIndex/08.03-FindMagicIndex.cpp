@@ -16,6 +16,7 @@ class Solution1 {
 };
 
 // 分治 - 向右侧收敛
+// time: O(n)
 // space: O(n)
 class Solution {
   private:
