@@ -4,6 +4,7 @@
 using namespace std;
 
 // Hash Table - 也可以排序后判断是否相等 - O(n*lgn)
+// 进阶 - 使用哈希表而不是数组来进行判断, 使用数组的unicode大小很可能超过100W
 // time: O(n)
 // space: O(1)
 class Solution {
