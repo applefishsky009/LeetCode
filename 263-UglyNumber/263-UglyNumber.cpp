@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 
+// 建表查表 - 无数个数进行判断的进阶方法
 // time: O(1)
 // space: O(1)
 class Solution0 {
