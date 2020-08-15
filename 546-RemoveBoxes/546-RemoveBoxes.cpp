@@ -11,6 +11,10 @@ using namespace std;
 // f(l, r - 1, 0) + (k + 1)^2表示把ar和后面的k个数一起删除, 再删除[l, r - 1]
 // max_i=l_r-1{|f(l, i, k + 1) + f(i + 1, r - 1, 0)| * ϵ(ai == ar)}代表当ai(l <= i < r) = ar的时候先删掉[i + 1, r - 1]区间再删[l, i]和后面的k + 1个ar序列, 这样可以让ar序列比原先更长
 // f(1, n, 0)即为答案
+// https://blog.csdn.net/wangqing008/article/details/39430381
+// 慢的原因是数据存储的局部性问题（data locality）:
+// 1. 使用二位数组Depart[500][21]的时候，所有数据在内存中是连续存放的。访问内存时，内存访问的局部性较强，Cache命中的概率较大。L1 Cache访问延迟只有几个指令周期，而内存访问延迟则达到几百个指令周期。
+// 2. Vector中的数据是连续存放的，但是Vector本身只保存指向数据块的指针。Vector建立在栈上，保存数据的数据块在堆上。因此二位动态数组Vector <Vector<int>>中，指向行的所有指针是连续存放的。每个行的数据是连续存放的，但是行与行之间是不连续存放的。因此跨行访问时局部性降低，Cache命中率下降。所以用时间更多
 // time: O(n^4)
 // space: O(n^3)
 class Solution {
