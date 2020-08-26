@@ -1,13 +1,14 @@
 ﻿#include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <D:/Github/RylModule/vector.h>
 using namespace std;
 
 // 回溯
 // time : O(3^m + 4^n)
 // space : O(m + n)
-class Solution {
+class Solution0 {
   public:
 	vector<string> letterCombinations(string digits) {
 		if (digits.empty()) return vector<string> ();
@@ -30,6 +31,31 @@ class Solution {
 			tmp.pop_back();
 		}
 	}
+};
+
+// 迭代
+// time : O(3^m + 4^n)
+// space : O(m + n)
+class Solution {
+  public:
+	vector<string> letterCombinations(string digits) {
+		if (digits.empty()) return vector<string> ();
+		vector<string> ans(1, "");
+		for (auto &d : digits) {
+			const int n = ans.size();
+			const int m = digitMap[d - '0'].size();
+			ans.resize(n * m);	// 为新来的字符分配足够的空间
+			for (int i = 1; i < m; ++i) // 为新的空间拷贝原来的值
+				copy(ans.begin(), ans.begin() + n, ans.begin() + n * i);	// 循环扩充一倍
+			for (int i = 0; i < m; ++i) {	// 为当前步赋合理值 - 扩充的倍数循环
+				auto begin = ans.begin();	
+				for_each(begin + n * i, begin + n * (i + 1), [&](string &s) { s += digitMap[d - '0'][i];});	// 为当前步赋予合理值
+			}
+		}
+		return ans;
+	}
+  private:
+    const vector<string> digitMap{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 };
 
 int main() {
