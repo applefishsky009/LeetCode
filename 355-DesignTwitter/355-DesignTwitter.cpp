@@ -49,6 +49,9 @@ class User {
     }
 };
 
+// HT Heap Design
+// time: O(1) + O(recentMax * num) + O(1) + O(1) num 为用户关注的人加上自己的数量和
+// space: O(recentMax * tot) tot为推特总用户数
 class Twitter {
   public:
     /** Initialize your data structure here. */
