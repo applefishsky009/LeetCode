@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// time: O(n)
+// space: O(1)
 class Solution {
 public:
     int findPoisonedDuration(vector<int> &timeSeries, int duration) {
